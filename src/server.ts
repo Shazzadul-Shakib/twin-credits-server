@@ -2,13 +2,14 @@
 import { Server as HTTPServer } from "http";
 import config from "./app/config";
 import app from "./app";
+import mongoose from "mongoose";
 
 let server: HTTPServer;
 const PORT = config.port || 5000;
 
 async function main() {
   try {
-    // await mongoose.connect(config.database_url as string);
+    await mongoose.connect(config.mongo_uri as string);
 
     server = app.listen(PORT, () => {
       console.log(`Twin Credits server is running to the port ${PORT}`);
