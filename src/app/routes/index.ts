@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { userRouter } from "../modules/user/user.routes";
 
 interface IModuleRoute {
   path: string;
@@ -7,7 +8,12 @@ interface IModuleRoute {
 
 export const appRoutes = Router();
 
-const moduleRoutes: IModuleRoute[] = [];
+const moduleRoutes: IModuleRoute[] = [
+  {
+    path: "/user",
+    router: userRouter,
+  },
+];
 
 moduleRoutes.forEach((route) => {
   appRoutes.use(route.path, route.router);

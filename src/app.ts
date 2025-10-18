@@ -30,7 +30,7 @@ app.get("/", (_, res) => {
 });
 
 // --- routes --- //
-app.use('/api', appRoutes);
+app.use("/api", appRoutes);
 
 // // ----- global error handler ----- //
 app.use(globalErrorHandler);

@@ -7,5 +7,7 @@ const config = {
   port: process.env.PORT,
   node_env: process.env.NODE_ENV,
   mongo_uri: process.env.MONGO_URI,
+  salt_round: process.env.SALT_ROUND,
+  
 };
 export default config;
