@@ -5,6 +5,7 @@ import { UserValidations } from "./user.validation";
 
 export const userRouter = Router();
 
+
 userRouter.post(
   "/register",
   validateRequest({ body: UserValidations.userValidationSchema }),
