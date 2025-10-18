@@ -55,4 +55,12 @@ userSchema.statics.isUserExistByReferralCode = async function (
   return await UserModel.findOne({ referralCode }).select("-password");
 };
 
+//  ----- compare password ----- //
+userSchema.statics.comparePassword = async function (
+  password: string,
+  hashedPassword: string
+) {
+  return await bcrypt.compare(password, hashedPassword);
+};
+
 export const UserModel = model<IUser, IUserModel>("User", userSchema);

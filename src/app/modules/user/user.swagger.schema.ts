@@ -2,7 +2,7 @@
  * @swagger
  * components:
  *   schemas:
- *     ErrorResponse:
+ *     RegisterErrorResponse:
  *       type: object
  *       properties:
  *         success:
@@ -25,7 +25,7 @@
  *               message:
  *                 type: string
  *                 example: "User already exist with this email!"
- *     UserResponse:
+ *     RegisterUserResponse:
  *       type: object
  *       properties:
  *         success:
@@ -69,7 +69,7 @@
  *             __v:
  *               type: integer
  *               example: 0
- *     UserInput:
+ *     RegisterInput:
  *       type: object
  *       required:
  *         - name
@@ -85,4 +85,74 @@
  *         password:
  *           type: string
  *           example: "StrongPass123!"
+ *     LoginInput:
+ *       type: object
+ *       required:
+ *         - email
+ *         - password
+ *       properties:
+ *         email:
+ *           type: string
+ *           example: astro@example.com
+ *         password:
+ *           type: string
+ *           example: "StrongPass123!"
+ *     LoginResponse:
+ *       type: object
+ *       properties:
+ *         success:
+ *           type: boolean
+ *           example: true
+ *         message:
+ *           type: string
+ *           example: "User logged in successfully"
+ *         statusCode:
+ *           type: integer
+ *           example: 200
+ *     LoginErrorResponse:
+ *       type: object
+ *       properties:
+ *         success:
+ *           type: boolean
+ *           example: false
+ *         message:
+ *           type: string
+ *           example: "Invalid password!"
+ *         statusCode:
+ *           type: integer
+ *           example: 401
+ *         error:
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               path:
+ *                 type: string
+ *                 example: ""
+ *               message:
+ *                 type: string
+ *                 example: "Invalid password!"
+ *     LoginNotFoundResponse:
+ *       type: object
+ *       properties:
+ *         success:
+ *           type: boolean
+ *           example: false
+ *         message:
+ *           type: string
+ *           example: "User not found!"
+ *         statusCode:
+ *           type: integer
+ *           example: 404
+ *         error:
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               path:
+ *                 type: string
+ *                 example: ""
+ *               message:
+ *                 type: string
+ *                 example: "User not found!"
  */

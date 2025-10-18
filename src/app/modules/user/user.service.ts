@@ -4,6 +4,8 @@ import { IUser } from "./user.interface";
 import { UserModel } from "./user.model";
 import { ReferralModel } from "../referral/referral.model";
 import { Types } from "mongoose";
+import { createToken } from "../../utils/createToken";
+import config from "../../config";
 
 // ----- user register service ----- //
 const registerUser = async (user: IUser) => {
@@ -42,6 +44,48 @@ const registerUser = async (user: IUser) => {
   return result;
 };
 
+// ----- user login service ----- //
+const loginUser = async (user: IUser) => {
+  const isUserExist = await UserModel.isUserExistByEmail(user.email);
+
+  if (!isUserExist) {
+    throw new AppError(status.NOT_FOUND, "User not found!");
+  }
+
+  // compare password
+  const isPasswordMatched = await UserModel.comparePassword(
+    user.password,
+    isUserExist.password
+  );
+  if (!isPasswordMatched) {
+    throw new AppError(status.UNAUTHORIZED, "Invalid password!");
+  }
+
+  // ----- create token ----- //
+  const accessToken = createToken(
+    {
+      email: isUserExist.email,
+      userId: isUserExist._id,
+    },
+    config.jwt_access_secret as string,
+    config.jwt_access_expires_in as string
+  );
+
+  const refreshToken = createToken(
+    {
+      email: isUserExist.email,
+    },
+    config.jwt_refresh_secret as string,
+    config.jwt_refresh_expires_in as string
+  );
+
+  return { accessToken, refreshToken };
+
+};
+
+
+
 export const userService = {
   registerUser,
+  loginUser,
 };
