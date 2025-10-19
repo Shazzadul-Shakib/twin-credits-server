@@ -2,6 +2,7 @@ import { Router } from "express";
 import { userRouter } from "../modules/user/user.routes";
 import { productRouter } from "../modules/product/product.routes";
 import { orderRouter } from "../modules/order/order.routes";
+import { referralRouter } from "../modules/referral/referral.routes";
 
 interface IModuleRoute {
   path: string;
@@ -22,6 +23,10 @@ const moduleRoutes: IModuleRoute[] = [
   {
     path: "/order",
     router: orderRouter,
+  },
+  {
+    path: "/referral",
+    router: referralRouter,
   },
 ];
 
