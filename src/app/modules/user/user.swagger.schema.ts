@@ -155,4 +155,125 @@
  *               message:
  *                 type: string
  *                 example: "User not found!"
+ *     RefreshTokenResponse:
+ *       type: object
+ *       properties:
+ *         success:
+ *           type: boolean
+ *           example: true
+ *         message:
+ *           type: string
+ *           example: "New Access token set successfully"
+ *         statusCode:
+ *           type: integer
+ *           example: 200
+ *     RefreshTokenErrorResponse:
+ *       type: object
+ *       properties:
+ *         success:
+ *           type: boolean
+ *           example: false
+ *         message:
+ *           type: string
+ *           example: "Invalid refresh token"
+ *         statusCode:
+ *           type: integer
+ *           example: 401
+ *         error:
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               path:
+ *                 type: string
+ *                 example: ""
+ *               message:
+ *                 type: string
+ *                 example: "Invalid refresh token"
+ *     LoggedUserResponse:
+ *       type: object
+ *       properties:
+ *         success:
+ *           type: boolean
+ *           example: true
+ *         message:
+ *           type: string
+ *           example: "User retrived successfully"
+ *         statusCode:
+ *           type: integer
+ *           example: 200
+ *         data:
+ *           type: object
+ *           properties:
+ *             _id:
+ *               type: string
+ *               example: "68f314bbf8619efcab3a3238"
+ *             name:
+ *               type: string
+ *               example: "Shakib"
+ *             email:
+ *               type: string
+ *               example: "shakib6@gm.com"
+ *             credits:
+ *               type: number
+ *               example: 0
+ *     LoggedUserErrorResponse:
+ *       type: object
+ *       properties:
+ *         success:
+ *           type: boolean
+ *           example: false
+ *         message:
+ *           type: string
+ *           example: "Invalid or expired token!"
+ *         statusCode:
+ *           type: integer
+ *           example: 401
+ *         error:
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               path:
+ *                 type: string
+ *                 example: ""
+ *               message:
+ *                 type: string
+ *                 example: "Invalid or expired token!"
+ *     LogoutResponse:
+ *       type: object
+ *       properties:
+ *         success:
+ *           type: boolean
+ *           example: true
+ *         message:
+ *           type: string
+ *           example: "Logged out successfully"
+ *         statusCode:
+ *           type: integer
+ *           example: 200
+ *     LogoutErrorResponse:
+ *       type: object
+ *       properties:
+ *         success:
+ *           type: boolean
+ *           example: false
+ *         message:
+ *           type: string
+ *           example: "Invalid or expired token!"
+ *         statusCode:
+ *           type: integer
+ *           example: 401
+ *         error:
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               path:
+ *                 type: string
+ *                 example: ""
+ *               message:
+ *                 type: string
+ *                 example: "Invalid or expired token!"
+ *
  */

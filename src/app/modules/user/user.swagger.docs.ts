@@ -57,3 +57,78 @@
  *               $ref: '#/components/schemas/LoginErrorResponse'
  *
  */
+
+/**
+ * @swagger
+ * /user/refresh-token:
+ *   post:
+ *     summary: Refresh access token
+ *     tags: [Users]
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/RefreshTokenInput'
+ *     responses:
+ *       200:
+ *         description: Access token refreshed successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/RefreshTokenResponse'
+ *       401:
+ *         description: Invalid refresh token
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/RefreshTokenErrorResponse'
+ *
+ */
+
+/**
+ * @swagger
+ * /user/logged-user:
+ *   get:
+ *     summary: Get logged-in user information
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: User information retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/LoggedUserResponse'
+ *       401:
+ *         description: Invalid or expired token!
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/LoggedUserErrorResponse'
+ *
+ */ 
+
+/**
+ * @swagger
+ * /user/logout:
+ *   post:
+ *     summary: Logout a user
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Logged out successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/LogoutResponse'
+ *       401:
+ *         description: Invalid or expired token!
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/LoggedUserErrorResponse'
+ *
+ */ 

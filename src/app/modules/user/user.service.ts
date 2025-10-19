@@ -6,6 +6,7 @@ import { ReferralModel } from "../referral/referral.model";
 import { Types } from "mongoose";
 import { createToken } from "../../utils/createToken";
 import config from "../../config";
+import jwt, { JwtPayload } from "jsonwebtoken";
 
 // ----- user register service ----- //
 const registerUser = async (user: IUser) => {
@@ -80,12 +81,53 @@ const loginUser = async (user: IUser) => {
   );
 
   return { accessToken, refreshToken };
-
 };
 
+// ----- refresh token service ----- //
+const refreshToken = async (refreshToken: string) => {
+  // verify refresh token
+  const decoded = jwt.verify(
+    refreshToken,
+    config.jwt_refresh_secret as string
+  ) as JwtPayload;
+  if (!decoded) {
+    throw new AppError(status.UNAUTHORIZED, "Invalid refresh token!");
+  }
+  // check if user exist
+  const isUserExist = await UserModel.isUserExistByEmail(decoded.email);
+  if (!isUserExist) {
+    throw new AppError(status.NOT_FOUND, "User not found!");
+  }
+  // create new access token
+  const accessToken = createToken(
+    {
+      email: isUserExist.email,
+      userId: isUserExist._id,
+    },
+    config.jwt_access_secret as string,
+    config.jwt_access_expires_in as string
+  );
+  return { accessToken };
+};
 
+// ----- get logged user service ----- //
+const getLoggedUser = async (userId: Types.ObjectId) => {
+  // ----- check if user exist by id ----- //
+  const isUserExist = await UserModel.findById(userId);
+  if (!isUserExist) {
+    throw new AppError(status.NOT_FOUND, "User not found!");
+  }
+  // ----- get all users except requested user ----- //
+  const result = await UserModel.findById(userId).select(
+    "name _id email credits"
+  );
+
+  return result;
+};
 
 export const userService = {
   registerUser,
   loginUser,
+  refreshToken,
+  getLoggedUser,
 };
