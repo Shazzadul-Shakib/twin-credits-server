@@ -1,7 +1,7 @@
 /**
  * @swagger
  * tags:
- *   name: Products
+ *   name: Product
  *   description: Product management
  */
 
@@ -10,7 +10,7 @@
  * /products:
  *   get:
  *     summary: Get all products
- *     tags: [Products]
+ *     tags: [Product] 
  *     responses:
  *       200:
  *         description: List of products

@@ -1,7 +1,7 @@
 /**
  * @swagger
  * tags:
- *   name: Users
+ *   name: User
  *   description: User management
  */
 
@@ -10,7 +10,7 @@
  * /user/register:
  *   post:
  *     summary: Register a new user
- *     tags: [Users]
+ *     tags: [User]
  *     requestBody:
  *       content:
  *         application/json:
@@ -36,7 +36,7 @@
  * /user/login:
  *   post:
  *     summary: Login a user
- *     tags: [Users]
+ *     tags: [User]
  *     requestBody:
  *       content:
  *         application/json:
@@ -63,7 +63,7 @@
  * /user/refresh-token:
  *   post:
  *     summary: Refresh access token
- *     tags: [Users]
+ *     tags: [User]
  *     requestBody:
  *       content:
  *         application/json:
@@ -90,7 +90,7 @@
  * /user/logged-user:
  *   get:
  *     summary: Get logged-in user information
- *     tags: [Users]
+ *     tags: [User]
  *     security:
  *       - bearerAuth: []
  *     responses:
@@ -114,7 +114,7 @@
  * /user/logout:
  *   post:
  *     summary: Logout a user
- *     tags: [Users]
+ *     tags: [User]
  *     security:
  *       - bearerAuth: []
  *     responses:

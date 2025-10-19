@@ -18,18 +18,22 @@ const options: swaggerJsdoc.Options = {
     ],
     tags: [
       {
-        name: "Users",
+        name: "User",
         description: "User management",
       },
       {
-        name: "Referrals",
+        name: "Referral",
         description: "Referral management",
       },
       {
-        name: "Products",
+        name: "Product",
         description: "Product management",
       },
-    ],
+      {
+        name: "Order",
+        description: "Order management",
+      },
+    ],  
   },
   // Paths to files where Swagger will look for documentation comments
   apis: ["./src/app/modules/**/*.ts", "./src/app/routes/*.ts"],

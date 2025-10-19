@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { userRouter } from "../modules/user/user.routes";
 import { productRouter } from "../modules/product/product.routes";
+import { orderRouter } from "../modules/order/order.routes";
 
 interface IModuleRoute {
   path: string;
@@ -17,6 +18,10 @@ const moduleRoutes: IModuleRoute[] = [
   {
     path: "/product",
     router: productRouter,
+  },
+  {
+    path: "/order",
+    router: orderRouter,
   },
 ];
 
