@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { userRouter } from "../modules/user/user.routes";
+import { productRouter } from "../modules/product/product.routes";
 
 interface IModuleRoute {
   path: string;
@@ -12,6 +13,10 @@ const moduleRoutes: IModuleRoute[] = [
   {
     path: "/user",
     router: userRouter,
+  },
+  {
+    path: "/product",
+    router: productRouter,
   },
 ];
 

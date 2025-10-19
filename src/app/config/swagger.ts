@@ -25,6 +25,10 @@ const options: swaggerJsdoc.Options = {
         name: "Referrals",
         description: "Referral management",
       },
+      {
+        name: "Products",
+        description: "Product management",
+      },
     ],
   },
   // Paths to files where Swagger will look for documentation comments
