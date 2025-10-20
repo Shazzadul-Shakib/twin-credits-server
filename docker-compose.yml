@@ -1,0 +1,14 @@
+
+services:
+  server:
+    build:
+      context: .
+      args:
+        NODE_ENV: ${NODE_ENV}   # Pass environment variable to Dockerfile
+    container_name: twincredits-server
+    ports:
+      - "5000:5000"
+    env_file: .env
+    volumes:
+      - .:/app            # Only effective for dev mode
+      - /app/node_modules
