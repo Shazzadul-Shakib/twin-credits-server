@@ -7,5 +7,6 @@ export const sendResponse = <T>(res: Response, data: IResponse<T>) => {
     message: data?.message,
     statusCode: data?.statusCode,
     data: data?.data,
+    metadata: data?.metadata, 
   });
 };

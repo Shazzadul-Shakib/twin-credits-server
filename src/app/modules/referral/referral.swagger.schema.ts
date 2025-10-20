@@ -5,6 +5,34 @@
 /**
  * @swagger
  * components:
+ *   parameters:
+ *     status:
+ *       in: query
+ *       name: status
+ *       schema:
+ *         type: string
+ *       description: Filter by referral status (pending, completed)
+ *     sortBy:
+ *       in: query
+ *       name: sortBy
+ *       schema:
+ *         type: string
+ *         example: createdAt
+ *       description: Field to sort by
+ *     sortOrder:
+ *       in: query
+ *       name: sortOrder
+ *       schema:
+ *         type: string
+ *         enum: [asc, desc]
+ *       description: Sort order
+ *     page:
+ *       in: query
+ *       name: page
+ *       schema:
+ *         type: integer
+ *         default: 1
+ *       description: Page number
  *   schemas:
  *     ReferredUser:
  *       type: object
@@ -33,9 +61,17 @@
  *                 description: ID of the user who made the referral
  *                 example: "68f33693751f9f9dc3f8074c"
  *               referredId:
- *                 type: string
- *                 description: ID of the user who was referred
- *                 example: "68f336a8751f9f9dc3f80750"
+ *                 type: object
+ *                 description: Details of the referred user
+ *                 properties:
+ *                   _id:
+ *                     type: string
+ *                     description: ID of the referred user
+ *                     example: "68f336a8751f9f9dc3f80750"
+ *                   name:
+ *                     type: string
+ *                     description: Name of the referred user
+ *                     example: "Shakib"
  *               status:
  *                 type: string
  *                 description: Current status of the referral
@@ -55,4 +91,24 @@
  *                 type: integer
  *                 description: Version key for MongoDB document
  *                 example: 0
+ *         metadata:
+ *           type: object
+ *           description: Metadata about the referral list
+ *           properties:
+ *             totalCount:
+ *               type: integer
+ *               description: Total number of referrals
+ *               example: 2
+ *             pendingCount:
+ *               type: integer
+ *               description: Number of pending referrals
+ *               example: 2
+ *             completedCount:
+ *               type: integer
+ *               description: Number of completed referrals
+ *               example: 0
+ *             page:
+ *               type: integer
+ *               description: Current page number
+ *               example: 1
  */

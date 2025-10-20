@@ -7,13 +7,16 @@ import { referralService } from "./referral.service";
 // ----- get referred users controller ----- //
 const getReferredUsers = catchAsync(async (req: Request, res: Response) => {
   const { userId } = req.user;
-  const result = await referralService.getReferredUsers(userId);
+  const queries = req.query;
+  const result = await referralService.getReferredUsers(userId, queries);
+  const { metadata, data } = result;
 
   sendResponse(res, {
     statusCode: status.OK,
     success: true,
     message: "Referred users retrieved successfully",
-    data: result,
+    data,
+    metadata,
   });
 });
 
