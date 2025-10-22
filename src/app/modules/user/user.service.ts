@@ -117,9 +117,9 @@ const getLoggedUser = async (userId: Types.ObjectId) => {
   if (!isUserExist) {
     throw new AppError(status.NOT_FOUND, "User not found!");
   }
-  // ----- get all users except requested user ----- //
+  // ----- get logged user info ----- //
   const result = await UserModel.findById(userId).select(
-    "name _id email credits"
+    "name _id email credits referralCode"
   );
 
   return result;
