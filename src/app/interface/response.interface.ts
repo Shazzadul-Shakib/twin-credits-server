@@ -7,6 +7,7 @@ export interface IResponse<T> {
     totalCount: number;
     pendingCount: number;
     completedCount: number;
+    limit:number;
     page: number;
   };
 }

@@ -41,6 +41,17 @@ class QueryBuilder<T> {
     ];
 
     excludeFields.forEach((el) => delete (queryObj as Record<string, any>)[el]);
+     Object.keys(queryObj).forEach((key) => {
+       const value = (queryObj as Record<string, any>)[key];
+       if (
+         value === "" ||
+         value === "all" ||
+         value === undefined ||
+         value === null
+       ) {
+         delete (queryObj as Record<string, any>)[key];
+       }
+     });
     this.queryModel = this.queryModel.find(queryObj as FilterQuery<T>);
 
     return this;
@@ -62,7 +73,7 @@ class QueryBuilder<T> {
   // ----- paginate ----- //
   paginate() {
     const page = Number(this.query.page) || 1;
-    const limit = Number(this.query.limit) || 10;
+    const limit = Number(this.query.limit) || 5;
     const skip = (page - 1) * limit;
 
     this.queryModel = this.queryModel.skip(skip).limit(limit);

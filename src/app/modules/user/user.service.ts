@@ -10,6 +10,7 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 
 // ----- user register service ----- //
 const registerUser = async (user: IUser) => {
+  console.log(user)
   let referrerId: Types.ObjectId | null = null;
 
   // check if user exist by email
@@ -36,10 +37,11 @@ const registerUser = async (user: IUser) => {
 
   // ----- create referral if there's a valid referrer ----- //
   if (referrerId) {
-    await ReferralModel.create({
+    const ref = await ReferralModel.create({
       referrerId,
       referredId: result._id,
     });
+   
   }
 
   return result;

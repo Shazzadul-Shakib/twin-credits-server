@@ -43,6 +43,7 @@ const getReferredUsers = async (
       totalCount,
       pendingCount,
       completedCount,
+      limit: Number(queries.limit) || 5,
       page: Number(queries.page) || 1,
     },
     data: result,
