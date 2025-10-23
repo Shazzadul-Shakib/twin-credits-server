@@ -2,6 +2,10 @@ import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import { Application } from "express";
 
+// Determine file extension based on environment
+const fileExtension = process.env.NODE_ENV === "production" ? "js" : "ts";
+const baseDir = process.env.NODE_ENV === "production" ? "./dist" : "./src";
+
 const options: swaggerJsdoc.Options = {
   definition: {
     openapi: "3.0.0",
@@ -13,7 +17,7 @@ const options: swaggerJsdoc.Options = {
     servers: [
       {
         url: "/api",
-        description: "API server",
+        description: "API Server",
       },
     ],
     tags: [
@@ -35,17 +39,22 @@ const options: swaggerJsdoc.Options = {
       },
     ],
   },
-  // Paths to files where Swagger will look for documentation comments
   apis: [
-    "./src/app/modules/**/*.ts",
-    "./src/app/routes/*.ts",
-    "./dist/app/modules/**/*.js",
-    "./dist/app/routes/*.js",
+    `${baseDir}/app/modules/**/*.${fileExtension}`,
+    `${baseDir}/app/routes/*.${fileExtension}`,
   ],
 };
 
 export const swaggerSpec = swaggerJsdoc(options);
 
 export const setupSwagger = (app: Application) => {
-  app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+  // Serve Swagger UI with custom options
+  app.use(
+    "/api-docs",
+    swaggerUi.serve,
+    swaggerUi.setup(swaggerSpec, {
+      customCss: ".swagger-ui .topbar { display: none }",
+      customSiteTitle: "Twin Credits API Docs",
+    })
+  );
 };
