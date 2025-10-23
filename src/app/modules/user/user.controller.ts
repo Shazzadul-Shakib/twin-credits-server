@@ -25,20 +25,16 @@ const loginUser = catchAsync(async (req: Request, res: Response) => {
 
   // ----- set refresh token in cookie ----- //
   res.cookie("refreshToken", result.refreshToken, {
-    httpOnly: true, 
-    secure: config.node_env === "production",
+    httpOnly: config.node_env === "production",
+    secure: true,
     sameSite: config.node_env === "production" ? "none" : "lax",
-    maxAge: 7 * 24 * 60 * 60 * 1000,
-    path: "/", 
   });
 
   // ----- set access token in cookie ----- //
   res.cookie("accessToken", result.accessToken, {
-    httpOnly: true,
-    secure: config.node_env === "production",
-    sameSite: config.node_env === "production" ? "none" : "lax", 
-    maxAge: 15 * 60 * 1000,
-    path: "/",
+    httpOnly: config.node_env === "production",
+    secure: true,
+    sameSite: config.node_env === "production" ? "none" : "lax",
   });
 
   sendResponse(res, {
@@ -57,7 +53,7 @@ const refreshToken = catchAsync(async (req: Request, res: Response) => {
   res.cookie("accessToken", result.accessToken, {
     httpOnly: config.node_env === "production",
     secure: true,
-    sameSite: config.node_env === "production" ? "none" : "strict",
+    sameSite: config.node_env === "production" ? "none" : "lax",
   });
 
   sendResponse(res, {
