@@ -26,15 +26,17 @@ const loginUser = catchAsync(async (req: Request, res: Response) => {
   // ----- set refresh token in cookie ----- //
   res.cookie("refreshToken", result.refreshToken, {
     httpOnly: config.node_env === "production",
-    secure: true,
-    sameSite: config.node_env === "production" ? "none" : "lax",
+    secure: config.node_env === "production",
+    sameSite: config.node_env === "production" ? "lax" : "lax",
+    domain: config.node_env === "production" ? ".vercel.app" : undefined,
   });
 
   // ----- set access token in cookie ----- //
   res.cookie("accessToken", result.accessToken, {
     httpOnly: config.node_env === "production",
-    secure: true,
-    sameSite: config.node_env === "production" ? "none" : "lax",
+    secure: config.node_env === "production",
+    sameSite: config.node_env === "production" ? "lax" : "lax",
+    domain: config.node_env === "production" ? ".vercel.app" : undefined,
   });
 
   sendResponse(res, {
@@ -88,8 +90,6 @@ const logoutUser = catchAsync(async (req: Request, res: Response) => {
     message: "Logged out successfully",
   });
 });
-
-
 
 export const userController = {
   registerUser,
