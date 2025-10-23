@@ -2,7 +2,6 @@ import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import { Application } from "express";
 
-// Determine file extension based on environment
 const fileExtension = process.env.NODE_ENV === "production" ? "js" : "ts";
 const baseDir = process.env.NODE_ENV === "production" ? "./dist" : "./src";
 
@@ -20,12 +19,6 @@ const options: swaggerJsdoc.Options = {
         description: "API Server",
       },
     ],
-    tags: [
-      { name: "User", description: "User management" },
-      { name: "Referral", description: "Referral management" },
-      { name: "Product", description: "Product management" },
-      { name: "Order", description: "Order management" },
-    ],
   },
   apis: [
     `${baseDir}/app/modules/**/*.${fileExtension}`,
@@ -33,24 +26,19 @@ const options: swaggerJsdoc.Options = {
   ],
 };
 
-export const swaggerSpec = swaggerJsdoc(options);
+const swaggerSpec = swaggerJsdoc(options);
 
 export const setupSwagger = (app: Application) => {
-  // Serve Swagger JSON
+  // Serve Swagger UI at /api-docs
+  app.use(
+    "/api-docs",
+    swaggerUi.serve,
+    swaggerUi.setup(swaggerSpec, { explorer: true })
+  );
+
+  // Serve raw JSON at /swagger.json
   app.get("/swagger.json", (req, res) => {
     res.setHeader("Content-Type", "application/json");
     res.send(swaggerSpec);
   });
-
-  // Serve Swagger UI
-  app.use(
-    "/api-docs",
-    swaggerUi.serve,
-    swaggerUi.setup(swaggerSpec, {
-      explorer: true,
-      swaggerOptions: {
-        url: "/swagger.json", // fetch swagger JSON from this route
-      },
-    })
-  );
 };
