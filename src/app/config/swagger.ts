@@ -12,12 +12,8 @@ const options: swaggerJsdoc.Options = {
     },
     servers: [
       {
-        url: "http://localhost:5000/api",
-        description: "Development server",
-      },
-      {
-        url: "https://twin-credits-server.vercel.app/api",
-        description: "Production server",
+        url: "/api",
+        description: "API server",
       },
     ],
     tags: [
