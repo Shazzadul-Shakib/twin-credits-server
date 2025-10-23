@@ -15,6 +15,10 @@ const options: swaggerJsdoc.Options = {
         url: "http://localhost:5000/api",
         description: "Development server",
       },
+      {
+        url: "https://twin-credits-server.vercel.app/api",
+        description: "Production server",
+      },
     ],
     tags: [
       {
@@ -33,10 +37,15 @@ const options: swaggerJsdoc.Options = {
         name: "Order",
         description: "Order management",
       },
-    ],  
+    ],
   },
   // Paths to files where Swagger will look for documentation comments
-  apis: ["./src/app/modules/**/*.ts", "./src/app/routes/*.ts"],
+  apis: [
+    "./src/app/modules/**/*.ts",
+    "./src/app/routes/*.ts",
+    "./dist/app/modules/**/*.js",
+    "./dist/app/routes/*.js",
+  ],
 };
 
 export const swaggerSpec = swaggerJsdoc(options);

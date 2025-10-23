@@ -7,7 +7,7 @@
 
 /**
  * @swagger
- * /products:
+ * /product:
  *   get:
  *     summary: Get all products
  *     tags: [Product] 
@@ -17,9 +17,7 @@
  *         content:
  *           application/json:
  *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/GetProductsResponse'
+ *               $ref: '#/components/schemas/GetProductsResponse'
  *       400:
  *         description: Invalid request
  *         content:

@@ -107,6 +107,10 @@
  *               type: integer
  *               description: Number of completed referrals
  *               example: 0
+ *             limit:
+ *               type: integer
+ *               description: Items per page
+ *               example: 5
  *             page:
  *               type: integer
  *               description: Current page number
