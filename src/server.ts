@@ -1,4 +1,3 @@
-// import mongoose from "mongoose";
 import { Server as HTTPServer } from "http";
 import config from "./app/config";
 import app from "./app";
