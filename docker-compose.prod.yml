@@ -1,0 +1,12 @@
+services:
+  server:
+    build:
+      context: .
+      dockerfile: dockerfile
+      args:
+        NODE_ENV: production
+    container_name: twincredits-server-prod
+    ports:
+      - "5000:5000"
+    env_file: .env
+    restart: unless-stopped

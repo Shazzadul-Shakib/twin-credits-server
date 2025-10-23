@@ -7,7 +7,6 @@ import AppError from "../../errorHandlers/appError";
 import status from "http-status";
 import { TOrder } from "./order.interface";
 
-
 // ----- create order service ----- //
 const createOrder = async (orderData: TOrder) => {
   const { userId, product } = orderData;
@@ -29,13 +28,13 @@ const createOrder = async (orderData: TOrder) => {
 
       const referrer = await UserModel.findById(referrerId).session(session);
       if (referrer) {
-        referrer.credits += 2;
+        referrer.credits = (referrer.credits || 0) + 2;
         await referrer.save({ session });
       }
 
       const referred = await UserModel.findById(userId).session(session);
       if (referred) {
-        referred.credits += 2;
+        referred.credits = (referred.credits || 0) + 2;
         await referred.save({ session });
       }
     }
