@@ -21,22 +21,10 @@ const options: swaggerJsdoc.Options = {
       },
     ],
     tags: [
-      {
-        name: "User",
-        description: "User management",
-      },
-      {
-        name: "Referral",
-        description: "Referral management",
-      },
-      {
-        name: "Product",
-        description: "Product management",
-      },
-      {
-        name: "Order",
-        description: "Order management",
-      },
+      { name: "User", description: "User management" },
+      { name: "Referral", description: "Referral management" },
+      { name: "Product", description: "Product management" },
+      { name: "Order", description: "Order management" },
     ],
   },
   apis: [
@@ -48,22 +36,21 @@ const options: swaggerJsdoc.Options = {
 export const swaggerSpec = swaggerJsdoc(options);
 
 export const setupSwagger = (app: Application) => {
-  // Option 1: Use serveFiles option (recommended)
-  const options = {
-    explorer: true,
-    swaggerOptions: {
-      url: "/api-docs/swagger.json",
-    },
-  };
-
-  app.get("/api-docs/swagger.json", (req, res) => {
+  // Serve Swagger JSON
+  app.get("/swagger.json", (req, res) => {
     res.setHeader("Content-Type", "application/json");
     res.send(swaggerSpec);
   });
 
+  // Serve Swagger UI
   app.use(
     "/api-docs",
-    swaggerUi.serveFiles(swaggerSpec, options),
-    swaggerUi.setup(swaggerSpec, options)
+    swaggerUi.serve,
+    swaggerUi.setup(swaggerSpec, {
+      explorer: true,
+      swaggerOptions: {
+        url: "/swagger.json", // fetch swagger JSON from this route
+      },
+    })
   );
 };
