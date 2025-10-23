@@ -48,13 +48,22 @@ const options: swaggerJsdoc.Options = {
 export const swaggerSpec = swaggerJsdoc(options);
 
 export const setupSwagger = (app: Application) => {
-  // Serve Swagger UI with custom options
+  // Option 1: Use serveFiles option (recommended)
+  const options = {
+    explorer: true,
+    swaggerOptions: {
+      url: "/api-docs/swagger.json",
+    },
+  };
+
+  app.get("/api-docs/swagger.json", (req, res) => {
+    res.setHeader("Content-Type", "application/json");
+    res.send(swaggerSpec);
+  });
+
   app.use(
     "/api-docs",
-    swaggerUi.serve,
-    swaggerUi.setup(swaggerSpec, {
-      customCss: ".swagger-ui .topbar { display: none }",
-      customSiteTitle: "Twin Credits API Docs",
-    })
+    swaggerUi.serveFiles(swaggerSpec, options),
+    swaggerUi.setup(swaggerSpec, options)
   );
 };

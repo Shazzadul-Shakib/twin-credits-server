@@ -1,9 +1,13 @@
-import { RequestHandler } from "express";
+import { Request, Response, NextFunction } from "express";
 
-export const notFound: RequestHandler = (_req, res) => {
+export const notFound = (req: Request, res: Response, next: NextFunction) => {
+  if (req.path.startsWith("/api-docs")) {
+    return next();
+  }
+
   res.status(404).json({
     success: false,
     message: "API endpoint not found",
-    error: "The requested API endpoint does not exist",
+    path: req.originalUrl,
   });
 };
