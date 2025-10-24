@@ -14,6 +14,18 @@ A digital platform with a referral and credit system, enabling users to earn rew
 - **API Documentation**: Comprehensive Swagger/OpenAPI documentation for all endpoints
 - **Database Integration**: Optimized MongoDB implementation with Mongoose schemas and relations
 
+## Technology used
+- Node js
+- Express js
+- TypeScript
+- RESTful APIs
+- Mongoose
+- MongoDB
+- JWT
+- Swagger 
+- Zod
+- Vercel
+
 ## 📋 Prerequisites
 
 Before you begin, ensure you have the following installed on your system:
